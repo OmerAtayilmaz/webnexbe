@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Database\Seeder;
 use Carbon\Carbon;
 use App\Models\Quote;
+use App\Models\Contact;
 use App\Models\Newsletter;
 class DatabaseSeeder extends Seeder
 {
@@ -34,6 +35,14 @@ class DatabaseSeeder extends Seeder
         foreach (range(1, 30) as $day) {
             $date = Carbon::now()->subDays($day)->startOfDay(); // Set specific day
             Newsletter::factory(rand(5, 10))->create([
+                'created_at' => $date->addHours(rand(8, 18)), // Random time within work hours
+                'updated_at' => $date,
+            ]);
+        }
+
+        foreach (range(1, 30) as $day) {
+            $date = Carbon::now()->subDays($day)->startOfDay(); // Set specific day
+            Contact::factory(rand(5, 10))->create([
                 'created_at' => $date->addHours(rand(8, 18)), // Random time within work hours
                 'updated_at' => $date,
             ]);

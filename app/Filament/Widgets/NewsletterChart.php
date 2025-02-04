@@ -10,6 +10,12 @@ use Carbon\Carbon;
 class NewsletterChart extends ChartWidget
 {
     protected static ?string $heading = 'Mail Abonelikleri';
+    protected function getOptions(): array
+    {
+        return [
+            'maintainAspectRatio' => false,
+        ];
+    }
 
     protected function getData(): array
     {
