@@ -16,7 +16,16 @@ class StoreNewsletterRequest extends FormRequest
     {
         return true;
     }
-
+    //Turkish messages for validation
+    public function messages(): array
+    {
+        return [
+            'email.required' => 'Email adresi zorunlu bir alandır.',
+            'email.email' => 'Girdiğiniz email adresi geçerli değil.',
+            'email.string' => 'Girdiğiniz email adresi string bir değer olmalıdır.',
+            'email.max:255' => 'Girdiğiniz email adresi en fazla 255 karakter olmalıdır.',
+        ];
+    }
     /**
      * Get the validation rules that apply to the request.
      *
