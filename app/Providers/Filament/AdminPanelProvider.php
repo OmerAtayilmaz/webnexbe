@@ -25,7 +25,10 @@ class AdminPanelProvider extends PanelProvider
         return $panel
             ->default()
             ->id('admin')
+
+
             ->path('backoffice')
+            ->brandLogo(fn () =>asset('assets/logo.png'))
             ->login()
             ->colors([
                 'primary' => Color::Purple,

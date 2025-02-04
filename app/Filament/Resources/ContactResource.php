@@ -12,12 +12,15 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Tables\Actions\ExportAction;
+
 
 class ContactResource extends Resource
 {
     protected static ?string $model = Contact::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+
 
     public static function form(Form $form): Form
     {
@@ -71,6 +74,7 @@ class ContactResource extends Resource
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
+                    ExportAction::make(),
                 ]),
             ]);
     }
@@ -87,8 +91,15 @@ class ContactResource extends Resource
         return [
             'index' => Pages\ListContacts::route('/'),
             'create' => Pages\CreateContact::route('/create'),
-            'view' => Pages\ViewContact::route('/{record}'),
-            'edit' => Pages\EditContact::route('/{record}/edit'),
+           // 'view' => Pages\ViewContact::route('/{record}'),
+           // 'edit' => Pages\EditContact::route('/{record}/edit'),
         ];
     }
+
+    public static function getPluralLabel(): string
+    {
+        return 'İletişim Formu Başvuruları'; // 👈 Changes plural title in pages
+    }
+
+
 }
