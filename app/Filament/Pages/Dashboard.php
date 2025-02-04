@@ -4,6 +4,7 @@ namespace App\Filament\Pages;
 
 use Filament\Pages\Page;
 use App\Filament\Widgets\QuotesChart;
+use App\Filament\Widgets\NewsletterChart;
 
 class Dashboard extends Page
 {
@@ -21,8 +22,17 @@ class Dashboard extends Page
     {
         return [
             QuotesChart::class,
+            NewsletterChart::class,
         ];
     }
 
+
+    protected function getColumns(): int | array
+    {
+        return [
+            3, 
+            1, 
+        ];
+    }
   
 }
