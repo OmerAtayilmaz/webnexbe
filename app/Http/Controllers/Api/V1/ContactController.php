@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Api\V1;
 
-use App\Http\Controllers\Controller;
+use App\Http\Requests\Api\V1\StoreContactRequest;
+use App\Models\Contact;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class ContactController extends Controller
 {
@@ -26,14 +28,15 @@ class ContactController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreContactRequest $request)
     {
-        
+        //store contact 
+        Contact::create($request->validated());
+
         return response()->json([
             'status' => 'success',
             'message' => 'Contact Form Successfully Sent',
         ], 200);
-
     }
 
     /**
