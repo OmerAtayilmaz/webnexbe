@@ -5,7 +5,8 @@ namespace Database\Seeders;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-
+use Carbon\Carbon;
+use App\Models\Quote;
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -16,8 +17,17 @@ class DatabaseSeeder extends Seeder
         // User::factory(10)->create();
 
         User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+            'name' => 'admin',
+            'email' => 'admin@gmail.com',
+            'password' => bcrypt('test1234'),
         ]);
+
+        foreach (range(1, 30) as $day) {
+            $date = Carbon::now()->subDays($day)->startOfDay(); // Set specific day
+            Quote::factory(rand(5, 10))->create([
+                'created_at' => $date->addHours(rand(8, 18)), // Random time within work hours
+                'updated_at' => $date,
+            ]);
+        }
     }
 }
