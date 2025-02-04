@@ -7,9 +7,15 @@ use App\Filament\Widgets\QuotesChart;
 
 class Dashboard extends Page
 {
-    protected static ?string $navigationIcon = 'heroicon-o-document-text';
 
     protected static string $view = 'filament.pages.dashboard';
+
+    protected static ?string $title = 'Yönetim Paneli'; // 👈 Page Title
+
+    protected static ?string $navigationIcon = 'heroicon-o-home'; // 👈 Change Sidebar Icon
+
+
+
 
     protected function getHeaderWidgets(): array
     {
@@ -17,4 +23,6 @@ class Dashboard extends Page
             QuotesChart::class,
         ];
     }
+
+  
 }
