@@ -13,13 +13,12 @@ return new class extends Migration
     {
         Schema::create('quotes', function (Blueprint $table) {
             $table->id()->autoIncrement();
-            $table->string('name');
+            $table->string('fullname');
             $table->string('email');
             $table->string('phone');
             $table->string('company');
-            $table->string('country');
-            $table->string('city');
-            $table->string('quote');
+            $table->string('service');
+            $table->string('message');
             $table->timestamps();
         });
     }

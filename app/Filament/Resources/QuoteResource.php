@@ -2,9 +2,9 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\ContactResource\Pages;
-use App\Filament\Resources\ContactResource\RelationManagers;
-use App\Models\Contact;
+use App\Filament\Resources\QuoteResource\Pages;
+use App\Filament\Resources\QuoteResource\RelationManagers;
+use App\Models\Quote;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -14,26 +14,18 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Tables\Actions\ExportAction;
 
-
-class ContactResource extends Resource
+class QuoteResource extends Resource
 {
-    protected static ?string $model = Contact::class;
-
-    //put a form icon
+    protected static ?string $model = Quote::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-cursor-arrow-ripple';
-    
-    //put Contact from under "Forms" group
     protected static ?string $navigationGroup = 'Forms';
-
-    //order
-    protected static ?int $navigationSort =2;
-
+    protected static ?int $navigationSort = 1;
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('name')
+                Forms\Components\TextInput::make('fullname')
                     ->required(),
                 Forms\Components\TextInput::make('email')
                     ->email()
@@ -41,9 +33,11 @@ class ContactResource extends Resource
                 Forms\Components\TextInput::make('phone')
                     ->tel()
                     ->required(),
-                Forms\Components\TextInput::make('message')
+                Forms\Components\TextInput::make('company')
                     ->required(),
-                Forms\Components\TextInput::make('status')
+                Forms\Components\TextInput::make('service')
+                    ->required(),
+                Forms\Components\TextInput::make('message')
                     ->required(),
             ]);
     }
@@ -52,15 +46,17 @@ class ContactResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('name')
+                Tables\Columns\TextColumn::make('fullname')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('email')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('phone')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('message')
+                Tables\Columns\TextColumn::make('company')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('status')
+                Tables\Columns\TextColumn::make('service')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('message')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
@@ -96,17 +92,15 @@ class ContactResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListContacts::route('/'),
-            'create' => Pages\CreateContact::route('/create'),
-           // 'view' => Pages\ViewContact::route('/{record}'),
-           // 'edit' => Pages\EditContact::route('/{record}/edit'),
+            'index' => Pages\ListQuotes::route('/'),
+            'create' => Pages\CreateQuote::route('/create'),
+            'view' => Pages\ViewQuote::route('/{record}'),
+            'edit' => Pages\EditQuote::route('/{record}/edit'),
         ];
     }
 
     public static function getPluralLabel(): string
     {
-        return 'İletişim Formu Başvuruları'; // 👈 Changes plural title in pages
+        return 'Teklif Formu Başvuruları'; // 👈 Changes plural title in pages
     }
-
-
 }
